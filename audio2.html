@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Audio Player with Play/Pause Control Only</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Hide all default audio controls except play/pause button */
+        #audio-player::-webkit-media-controls-start-playback-button,
+        #audio-player::-webkit-media-controls-panel,
+        #audio-player::-webkit-media-controls-current-time-display,
+        #audio-player::-webkit-media-controls-time-remaining-display,
+        #audio-player::-webkit-media-controls-enclosure,
+        #audio-player::-webkit-media-controls-toggle-button {
+            display: none;
+        }
+
+        /* Style for custom play/pause button */
+        #play-pause-button {
+            cursor: pointer;
+            font-size: 24px;
+            color: rgb(0, 0, 0);
+            /* Change color as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="audio-player" controls class="hidden">
+        <source src="子一、別學.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="play-pause-button">播放</div>
+
+    <script>
+        var audio = document.getElementById('audio-player');
+        var playPauseButton = document.getElementById('play-pause-button');
+
+        // Play or pause the audio when the custom play/pause button is clicked
+        playPauseButton.addEventListener('click', function () {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = '暫停'; // Change to pause symbol
+            } else {
+                audio.pause();
+                playPauseButton.textContent = '播放'; // Change to play symbol
+            }
+        });
+
+        // Update play/pause button when audio playback state changes
+        audio.addEventListener('play', function () {
+            playPauseButton.textContent = '暫停'; // Change to pause symbol
+        });
+
+        audio.addEventListener('pause', function () {
+            playPauseButton.textContent = '播放'; // Change to play symbol
+        });
+    </script>
+
+</body>
+
+</html>
